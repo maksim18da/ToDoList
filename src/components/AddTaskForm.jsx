@@ -1,0 +1,32 @@
+import { useContext } from "react"
+import { TasksContext } from "../context/TaskContext"
+import Field from "./Field"
+import Button from "./Button"
+
+const AddTaskForm = () => {
+    const {
+        addTask,
+        newTaskTitle,
+        setNewTaskTitle,
+        newTaskInputRef,
+    } = useContext(TasksContext)
+
+    function onSubmit(e){
+        e.preventDefault()
+        addTask()
+    }
+    return(
+        <form className="todo__form" onSubmit={onSubmit}>
+            <Field 
+                className='todo__field'
+                label='New task title'
+                id='new-task'
+                value={newTaskTitle}
+                onInput={(event)=>setNewTaskTitle(event.target.value)}
+                ref={newTaskInputRef}
+            />
+            <Button type='submit'>Add</Button>
+        </form>
+    )
+}
+export default AddTaskForm
